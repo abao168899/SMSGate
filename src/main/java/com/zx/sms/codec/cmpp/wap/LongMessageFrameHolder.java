@@ -620,6 +620,7 @@ public enum LongMessageFrameHolder {
 			short pkTotle = 1;
 			for (InformationElement udhi : header.infoElement) {
 				if (SmsUdhIei.CONCATENATED_8BIT.equals(udhi.udhIei)) {
+					i = 0;
 					frameKey = byteToInt(udhi.infoEleData[i++]);
 					pkTotle = (short) byteToInt(udhi.infoEleData[i++]);
 					frameholder = new FrameHolder(frameKey, pkTotle);
@@ -632,6 +633,7 @@ public enum LongMessageFrameHolder {
 					frame.setPknumber(pknumber);
 
 				} else if (SmsUdhIei.CONCATENATED_16BIT.equals(udhi.udhIei)) {
+					i = 0;
 					frameKey = (int) (((udhi.infoEleData[i] & 0xff) << 8) | (udhi.infoEleData[i + 1] & 0xff) & 0x0ffff);
 					i += 2;
 					pkTotle = (short) byteToInt(udhi.infoEleData[i++]);
